@@ -4,7 +4,7 @@
     <meta name="screen-orientation" content="portrait">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0"/>
-    <title>年会抽奖小程序</title>
+    <title>柚家年会抽奖</title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/wall.css">
     <style type="text/css">
@@ -155,6 +155,7 @@
 <script type="text/javascript">
     (function(){
         var choosed = JSON.parse(localStorage.getItem('choosed')) || {};
+        var choosedCount = localStorage.getItem('choosedCount') || 0;
         console.log(choosed);
         var speed = function(){
             return [0.1 * Math.random() + 0.01, -(0.1 * Math.random() + 0.01)];
@@ -169,11 +170,10 @@
                 var key = getKey(item);
                 var color = choosed[key] ? 'yellow' : 'white';
                 if(color == 'yellow'){
-                    html.push('<li><a href="#" >' + item.name + '<img height="80" width="80" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg?imageMogr2/blur/80x100" /></a></li>')
+                    html.push('<li><a href="#" >' + item.name + '<img height="60"  width="60" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg?imageMogr2/blur/80x100" /></a></li>')
                 }else{
-                    html.push('<li><a href="#" >' + item.name + '<img height="80" width="80" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg" /></a></li>')
+                    html.push('<li><a href="#" >' + item.name + '<img height="60" width="60" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg" /></a></li>')
                 }
-                // html.push('<li><a href="#" style="color: ' + color + ';">' + item.name + '</a></li>');
             });
             html.push('</ul>');
             return html.join('');
@@ -184,6 +184,10 @@
             var list = canvas.getElementsByTagName('a');
             var color = '#' + ('00000' + Math.floor(Math.random() * 0xffffff)).slice(-6);
             var color = 'yellow';
+            if(count > total - choosedCount){
+                alert('抽奖人数不足！！！');
+                return;
+            }
             for(var i = 0; i < count; i++){
                 do {
                     var id = Math.ceil(Math.random() * total);
@@ -192,12 +196,14 @@
                     }
                 } while(choosed[key]);
                 choosed[key] = 1;
-                ret.push(member[id].name + '<br/>' + member[id].phone + '<br/><img height="80" width="80" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg" />');
+                ret.push(member[id].name + '<br/><img height="100" width="100" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg" />');
                 list[id].style.color = color;
                 var img = list[id].getElementsByTagName("img")[0]
                 img.setAttribute("src",img.getAttribute("src") + "?imageMogr2/blur/80x100")
             }
             localStorage.setItem('choosed', JSON.stringify(choosed));
+            choosedCount = choosedCount + count;
+            localStorage.setItem('choosedCount',choosedCount);
             return ret;
         };
         var canvas = document.createElement('canvas');
@@ -208,10 +214,10 @@
         new Vue({
             el: '#tools',
             data: {
-                selected: 30,
+                selected: 6,
                 running: false,
                 btns: [
-                    30, 10, 5, 2, 1
+                   6,3,2,1
                 ]
             },
             ready: function(){
