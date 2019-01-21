@@ -168,8 +168,12 @@
                 item.index = index;
                 var key = getKey(item);
                 var color = choosed[key] ? 'yellow' : 'white';
+                if(color == 'yellow'){
+                    html.push('<li><a href="#" >' + item.name + '<img height="80" width="80" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg?imageMogr2/blur/80x100" /></a></li>')
+                }else{
+                    html.push('<li><a href="#" >' + item.name + '<img height="80" width="80" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg" /></a></li>')
+                }
                 // html.push('<li><a href="#" style="color: ' + color + ';">' + item.name + '</a></li>');
-                html.push('<li><a href="#" ><img height="50" width="50" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg" /></a></li>')
             });
             html.push('</ul>');
             return html.join('');
@@ -188,8 +192,10 @@
                     }
                 } while(choosed[key]);
                 choosed[key] = 1;
-                ret.push(member[id].name + '<br/>' + member[id].phone);
+                ret.push(member[id].name + '<br/>' + member[id].phone + '<br/><img height="80" width="80" src="http://app-img.aiyoujia.com/user/img/62c973188d5610bd275d6ce1f50a87d5_1544163077.jpg" />');
                 list[id].style.color = color;
+                var img = list[id].getElementsByTagName("img")[0]
+                img.setAttribute("src",img.getAttribute("src") + "?imageMogr2/blur/80x100")
             }
             localStorage.setItem('choosed', JSON.stringify(choosed));
             return ret;
