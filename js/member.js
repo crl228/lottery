@@ -173,5 +173,20 @@ var member = [
     "phone": "0035",
     "name": "兆振",
     "avatar": "https://web-cdn.aiyoujia.com/lottery/兆振.jpg"
+  },
+  {
+    "phone": "0036",
+    "name": "余煌",
+    "avatar": "https://web-cdn.aiyoujia.com/lottery/余煌.jpg"
+  },
+  {
+    "phone": "0037",
+    "name": "吴凯凯",
+    "avatar": "https://web-cdn.aiyoujia.com/lottery/吴凯凯.jpg"
+  },
+  {
+    "phone": "0038",
+    "name": "陈立峰",
+    "avatar": "https://web-cdn.aiyoujia.com/lottery/陈立峰.jpg"
   }
 ];
